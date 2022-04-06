@@ -32,13 +32,9 @@
 <div class="row  mt-5">
 <div class="col-3 "></div>
 <div class="col-6 ">
-
-            
-                 
+     
               
                 <div class="card ">
-
-
 <div class="card-header text-center " style="background-color: #003366;">
 <h5 class="card-title fw-bold text-white">Php Developer Task</h5>
 </div>
@@ -101,10 +97,10 @@
   <tbody>
 
   
-  @foreach ($arraySize1 as $arraySize)
+  @foreach ($arraySize1 as $key =>$arraySize)
     <tr>
     <td>{{$arraySize}}</td>
-      <td></td>
+      <td>{{$arrayQuantity1[$key]}}</td>
     </tr>
    @endforeach
   

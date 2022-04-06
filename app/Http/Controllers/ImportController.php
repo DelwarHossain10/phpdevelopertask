@@ -19,33 +19,7 @@ class ImportController extends Controller
     public function index()
     {
         
-         $fileName =public_path('size details.pdf');
-        $parser = new Parser();
-        $pdf = $parser->parseFile($fileName);
-        $text = $pdf->getText();
-        
-        $data= $pdf->getText();
-		preg_match_all("/(?<=\*)\d{2,}/i",$data,$arrayQuantity);
-		preg_match_all("/\d{2}\/\d{2,}\s\(\d{2,}\/\d{2,}\)\*/i",$data,$arraySize);
-		preg_match_all("/\d{4,}[-]\d+/i",$data,$arrayOrderNo);
-	preg_match_all("/\d{4}/i",$data,$arrayS);
-		//echo $arrayOrderNo[0][0];
-		//echo $arraySupplierCode[0][0];
-		//$array = explode(" ",$data);
-		echo "<pre>";
-		print_r($arrayS[0][12]);
-	//print_r(array_unique($arrayQuantity));
-		//print_r($arraySupplierCode);
-		echo "<pre>";
-		
-		
-		
-		die();
-     
-      //  echo Pdf::getText('size details.pdf');
-        // $text = (new Pdf('/usr/local/bin/pdftotext'))
-        // ->setPdf('./size details.pdf')
-        // ->text();
+   
     }
 
     /**
@@ -79,13 +53,14 @@ class ImportController extends Controller
     
             $pdfParser = new Parser();
             $pdf = $pdfParser->parseFile($file->path());
-            $content = $pdf->getText();
-            $data= $pdf->getText();
-            preg_match_all("/(?<=\)\*\s)\d{2,}/i",$data,$arrayQuantitys);
+           
+             $data= $pdf->getText();
+           
+            //preg_match_all("/(?<=\)\*\s)\d{2,}/i",$data,$arrayQuantitys);
+            preg_match_all("/\s\d{2,3}\s/i",$data,$arrayQuantitys);
             preg_match_all("/\d{2}\/\d{2,}\s\(\d{2,}\/\d{2,}\)\*/i",$data,$arraySizes);
             preg_match_all("/\d{4,}[-]\d+/i",$data,$arrayOrderNo);
             preg_match_all("/\d{4}/i",$data,$arrayS);
-           
            
             $Suplierno=$arrayS[0][12];
 
@@ -102,20 +77,14 @@ class ImportController extends Controller
             }
 
             $arraySize1 = array_slice($arraySize1, 0, 36);
-
-            //return $arraySize;
-            //return Response()->json($arraySize);
-        	//echo "<pre>";
-		//print_r($arraySize1);
-		//echo "<pre>";
-
-        
-
+            $arrayQuantity1 = array_slice( $arrayQuantity1,6,41);
+            $arrayQuantity1 = array_slice( $arrayQuantity1,0,36);
+            //$totalTableData=array_combine($arrayQuantity1,$arraySize1);
 		return view('welcome',compact('arrayQuantity1','arraySize1','Suplierno','Orderno'));
                
            }
      
-        return "bad";
+        return "No File";
     }
 
     /**

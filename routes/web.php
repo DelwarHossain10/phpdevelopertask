@@ -15,7 +15,6 @@ use App\Http\Controllers\ImportController;
 */
 
 Route::get('/', function () {
-   
     $arrayQuantity1=[];
     $arraySize1=[];
     $Suplierno= 0;
@@ -27,4 +26,4 @@ Route::get('/', function () {
 
 Route::resource('fileUpload', ImportController::class);
 
-Route::get('/import',[ImportController::class,'index']);
+
